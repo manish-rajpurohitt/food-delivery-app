@@ -1,0 +1,5 @@
+/backend/auth-service/node_modules
+/backend/restaurant-service/node_modules
+/backend/common/node_modules
+/backend/delivery-service/node_modules
+*.env

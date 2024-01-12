@@ -1,0 +1,64 @@
+Restaurant
+- RestaurantDetails
+    - LiveCoordinates
+    - Address
+    - RestaurantName
+    - RestaurantDescription
+    - LogoUrl
+    - Password
+    - Email
+
+- Categories
+    - CategoryName
+    - CategoryDescription
+    - CategoryImageUrl
+
+- Items
+    - CategoryId
+    - ItemName
+    - Price
+    - Description
+    - ItemImageUrl
+
+DeliveryUser
+    - Username
+    - Email
+    - Password
+    - Address
+    - LiveCoordinates
+
+ClientDetails
+    - username
+    - email
+    - password
+    - Live Coordinates
+    - Address
+    - ProfileImageUrl
+    
+Cart
+    - RestaurantId
+    - Items[]
+        - ItemId
+        - ItemQty
+
+Order
+    - clientDetails
+        - clientId
+        - clientName
+        - clientLiveCoords
+        - clientEmail
+    - restaurantDetails
+        - restaurantId
+        - restaurantName
+        - restaurantLiveCoords
+        - restaurantEmail
+    - riderDetails
+        - riderId
+        - riderName
+        - riderEmail
+        - riderLiveCoords
+    - orderStatus
+    - deliveryStatus
+    - paymentStatus
+    - paymentType
+    - transactionDetails
