@@ -1,6 +1,5 @@
-import express  from "express";
-import {clientAuthController } from "../../controllers/index.js";
-import tokenHekper from "../../services/tokenService.js";
+import express from "express";
+import { clientAuthController } from "../../controllers/index.js";
 
 const router = express.Router();
 

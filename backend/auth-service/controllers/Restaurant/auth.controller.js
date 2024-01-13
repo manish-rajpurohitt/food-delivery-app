@@ -1,12 +1,11 @@
-import {RestaurantModels, Models} from "common";
-import {Helpers} from "common";
-import tokenHekper from "../../services/tokenService.js";
+import { RestaurantModels, Models, restaurantTokenHelper } from "common";
+import { Helpers } from "common";
 
 
 
 const signup = async (req, res, next) => {
-    try{
-        if(Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)){
+    try {
+        if (Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)) {
             Helpers.responseHelper(res, 400, "Email and password cannot be empty!");
             return;
         }
@@ -26,7 +25,7 @@ const signup = async (req, res, next) => {
 
         return;
     }
-    catch(ex){
+    catch (ex) {
         console.log(ex);
         Helpers.responseHelper(res, 400, "Server error!", null)
     }
@@ -34,26 +33,26 @@ const signup = async (req, res, next) => {
 
 
 const signin = async (req, res, next) => {
-    try{
-        if(Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)){
+    try {
+        if (Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)) {
             Helpers.responseHelper(res, 400, "Email and password cannot be empty!");
             return;
         }
 
-        let restaurant = await RestaurantModels.Restaurant.findOne({email: req.body.email});
+        let restaurant = await RestaurantModels.Restaurant.findOne({ email: req.body.email });
 
-        if(!restaurant){
+        if (!restaurant) {
             Helpers.responseHelper(res, 404, "User with email not found!", null);
             return
         }
 
         let isPasswordValid = await restaurant.comparePassword(req.body.password);
- 
-        if(!isPasswordValid){
+
+        if (!isPasswordValid) {
             Helpers.responseHelper(res, 401, "Invalid Password", null);
             return;
         }
-        let token = await tokenHekper.generateAuthToken({
+        let token = await restaurantTokenHelper.generateAuthToken({
             _id: restaurant._id,
             name: restaurant.restaurantName
         });
@@ -64,10 +63,10 @@ const signin = async (req, res, next) => {
 
         return;
     }
-    catch(ex){
+    catch (ex) {
         console.log(ex);
         Helpers.responseHelper(res, 400, "Server error!", null)
     }
 }
 
-export default {signup, signin}
+export default { signup, signin }

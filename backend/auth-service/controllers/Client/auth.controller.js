@@ -1,12 +1,10 @@
-import {ClientModels, Models} from "common";
-import {Helpers} from "common";
-import tokenHekper from "../../services/tokenService.js";
-
+import { ClientModels, Models, clientTokenHelper } from "common";
+import { Helpers } from "common";
 
 
 const signup = async (req, res, next) => {
-    try{
-        if(Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)){
+    try {
+        if (Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)) {
             Helpers.responseHelper(res, 400, "Email and password cannot be empty!");
             return;
         }
@@ -26,7 +24,7 @@ const signup = async (req, res, next) => {
 
         return;
     }
-    catch(ex){
+    catch (ex) {
         console.log(ex);
         Helpers.responseHelper(res, 400, "Server error!", null)
     }
@@ -34,26 +32,26 @@ const signup = async (req, res, next) => {
 
 
 const signin = async (req, res, next) => {
-    try{
-        if(Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)){
+    try {
+        if (Helpers.IsStringNullOrEmptyOrUndefined(req.body.email) || Helpers.IsStringNullOrEmptyOrUndefined(req.body.password)) {
             Helpers.responseHelper(res, 400, "Email and password cannot be empty!");
             return;
         }
 
-        let client = await ClientModels.User.findOne({email: req.body.email});
+        let client = await ClientModels.User.findOne({ email: req.body.email });
 
-        if(!client){
+        if (!client) {
             Helpers.responseHelper(res, 404, "User with email not found!", null);
             return
         }
 
         let isPasswordValid = await client.comparePassword(req.body.password);
- 
-        if(!isPasswordValid){
+
+        if (!isPasswordValid) {
             Helpers.responseHelper(res, 401, "Invalid Password", null);
             return;
         }
-        let token = await tokenHekper.generateAuthToken({
+        let token = await clientTokenHelper.generateAuthToken({
             _id: client._id,
             name: client.username
         });
@@ -64,10 +62,10 @@ const signin = async (req, res, next) => {
 
         return;
     }
-    catch(ex){
+    catch (ex) {
         console.log(ex);
         Helpers.responseHelper(res, 400, "Server error!", null)
     }
 }
 
-export default {signup, signin}
+export default { signup, signin }
