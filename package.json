@@ -1,0 +1,22 @@
+{
+  "name": "food-delivery-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:frontend": "cd frontend && npm run start ",
+    "start:backend": "cd backend && npm run start",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manish-rajpurohitt/food-delivery-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manish-rajpurohitt/food-delivery-app/issues"
+  },
+  "homepage": "https://github.com/manish-rajpurohitt/food-delivery-app#readme"
+}

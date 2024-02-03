@@ -10,11 +10,20 @@ const signup = async (req, res, next) => {
             return;
         }
 
+
+        let delUser = await DeliveryModels.DeliveryUser.findOne({ email: req.body.email });
+
+        if (delUser) {
+            Helpers.responseHelper(res, 400, "User Already Created. Please Login to continue.", null);
+            return
+        }
+
+
         let address = await Models.Address.create({
             ...req.body.address
         });
 
-        let delUser = await DeliveryModels.DeliveryUser.create({
+        delUser = await DeliveryModels.DeliveryUser.create({
             ...req.body,
             address: address._id
         });

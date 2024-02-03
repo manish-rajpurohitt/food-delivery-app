@@ -1,7 +1,7 @@
 import express from "express";
 import categoryRoutes from "./category.routes.js"
-import itemsRoutes from "./category.routes.js"
-import restaurantRoutes from "./category.routes.js"
+import itemsRoutes from "./items.routes.js"
+import restaurantRoutes from "./restaurant.routes.js"
 
 const router = express.Router();
 

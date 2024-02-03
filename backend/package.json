@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:auth": "nodemon auth-service/index.js",
+    "start:restaurant": "nodemon restaurant-service/index.js",
+    "start:delivery": "nodemon delivery-service/index.js",
+    "start:client": "nodemon client-service/index.js",
+    "start": "concurrently \"npm run start:auth\" \"npm run start:restaurant\" \"npm run start:delivery\" \"npm run start:client\""
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "common": "file:./common"
+  }
+}

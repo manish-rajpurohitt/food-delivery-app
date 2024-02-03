@@ -10,11 +10,20 @@ const signup = async (req, res, next) => {
             return;
         }
 
+
+        let restaurant = await RestaurantModels.Restaurant.findOne({ email: req.body.email });
+
+        if (restaurant) {
+            Helpers.responseHelper(res, 400, "Restaurant Already Created. Please Login to continue.", null);
+            return
+        }
+
+
         let address = await Models.Address.create({
             ...req.body.address
         });
 
-        let restaurant = await RestaurantModels.Restaurant.create({
+        restaurant = await RestaurantModels.Restaurant.create({
             ...req.body,
             address: address._id
         });

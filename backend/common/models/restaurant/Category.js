@@ -8,12 +8,9 @@ const categorySchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        required: true,
     },
     description: {
         type: String,
-        required: true,
-        unique: true,
     },
     restaurantId: {
         type: mongoose.Schema.Types.ObjectId,

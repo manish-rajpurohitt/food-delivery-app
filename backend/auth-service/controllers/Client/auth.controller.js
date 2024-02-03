@@ -9,11 +9,18 @@ const signup = async (req, res, next) => {
             return;
         }
 
+        let client = await ClientModels.User.findOne({ email: req.body.email });
+
+        if (client) {
+            Helpers.responseHelper(res, 400, "User Already Created. Please Login to continue.", null);
+            return
+        }
+
         let address = await Models.Address.create({
             ...req.body.address
         });
 
-        let client = await ClientModels.User.create({
+        client = await ClientModels.User.create({
             ...req.body,
             address: address._id
         });

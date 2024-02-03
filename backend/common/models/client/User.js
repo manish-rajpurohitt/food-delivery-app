@@ -1,4 +1,4 @@
-import {mongoose} from "mongoose";
+import { mongoose } from "mongoose";
 import bcryptjs from "bcryptjs";
 // Define the user schema
 const userSchema = new mongoose.Schema({
@@ -26,8 +26,6 @@ const userSchema = new mongoose.Schema({
   },
   logoUrl: {
     type: String,
-    required: true,
-    unique: true,
   },
   // Add more fields as needed for your user model
 });

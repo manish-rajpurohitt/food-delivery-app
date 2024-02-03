@@ -1,5 +1,8 @@
 /backend/auth-service/node_modules
+/backend/client-service/node_modules
+/frontend/node_modules
 /backend/restaurant-service/node_modules
 /backend/common/node_modules
 /backend/delivery-service/node_modules
+/backend/node_modules
 *.env
